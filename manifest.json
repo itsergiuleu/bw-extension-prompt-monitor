@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "Prompt Monitor",
+  "version": "1.0.0",
+  "description": "Monitors ChatGPT prompts for sensitive data (emails) and provides anonymization options",
+  "permissions": [
+    "storage",
+    "activeTab"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "scripts": ["background.js"]
+  },
+  "content_scripts": [
+    {
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "matches": [
+        "https://chatgpt.com/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["inject-fetch-interceptor.js"],
+      "matches": [
+        "https://chatgpt.com/*"
+      ]
+    }
+  ]
+}
